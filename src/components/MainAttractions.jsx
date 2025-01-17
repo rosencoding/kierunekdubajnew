@@ -319,7 +319,7 @@ const MainAttractions = () => {
             className="fixed bottom-8 right-8"
           >
             <Link
-              to="/plan"
+              to="/plan-podrozy"
               className="flex items-center bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300"
             >
               <span className="mr-2">Stwórz plan podróży</span>
