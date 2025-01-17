@@ -19,8 +19,8 @@ function markdown() {
           code: `
             const metadata = ${JSON.stringify(data)};
             const content = ${JSON.stringify(content)};
-            export { metadata };
-            export default content;
+            export { metadata, content };
+            export default { metadata, content };
           `,
           map: { mappings: '' }
         };
@@ -34,11 +34,18 @@ function markdown() {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/my-app/',
   plugins: [
     react(),
     markdown()
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   build: {
+    outDir: 'dist',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -60,6 +67,8 @@ export default defineConfig({
   },
   server: {
     cors: true,
-    compression: true
+    compression: true,
+    port: 3000,
+    base: '/my-app/'
   }
 });
