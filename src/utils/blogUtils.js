@@ -12,21 +12,25 @@ export function getSortedPostsData() {
       console.log('Raw post data:', post);
       
       // Extract metadata and content
-      const metadata = post.metadata || {};
-      const content = post.default || '';
+      const { metadata, content } = post.default;
       
       console.log('Extracted data:', { id, metadata, contentPreview: content.slice(0, 100) });
       
       return {
         id,
-        ...metadata,
+        title: metadata.title,
+        date: metadata.date,
+        category: metadata.category,
+        tags: metadata.tags,
+        featuredImage: metadata.featuredImage,
+        excerpt: metadata.excerpt,
         content
       };
     });
 
     // Sort posts by date
     const sortedPosts = allPostsData.sort((a, b) => {
-      if (a.date < b.date) {
+      if (new Date(a.date) < new Date(b.date)) {
         return 1;
       } else {
         return -1;
@@ -60,40 +64,36 @@ export function getPostsByCategory(category) {
 
 export function getAllCategories() {
   const posts = getSortedPostsData();
-  const categories = new Set(posts.map(post => post.category));
-  return Array.from(categories);
+  const categories = [...new Set(posts.map(post => post.category))];
+  return categories.filter(Boolean); // Remove any undefined or null values
 }
 
 export function getRelatedPosts(currentPost, limit = 3) {
   if (!currentPost) return [];
-  
+
   const allPosts = getSortedPostsData();
   
-  // Filter out the current post
+  // Remove the current post from the list
   const otherPosts = allPosts.filter(post => post.id !== currentPost.id);
   
-  // Score each post based on relevance
+  // Score each post based on matching criteria
   const scoredPosts = otherPosts.map(post => {
     let score = 0;
     
     // Same category
-    if (post.category === currentPost.category) {
-      score += 3;
-    }
+    if (post.category === currentPost.category) score += 3;
     
-    // Shared tags
-    const sharedTags = (post.tags || []).filter(tag => 
-      (currentPost.tags || []).includes(tag)
-    ).length;
-    score += sharedTags;
+    // Matching tags
+    const matchingTags = post.tags?.filter(tag => 
+      currentPost.tags?.includes(tag)
+    ).length || 0;
+    score += matchingTags;
     
-    // Recent posts get a small boost
+    // Recent posts (within 30 days)
     const daysDifference = Math.abs(
       (new Date(post.date) - new Date(currentPost.date)) / (1000 * 60 * 60 * 24)
     );
-    if (daysDifference < 30) {
-      score += 1;
-    }
+    if (daysDifference <= 30) score += 1;
     
     return { ...post, score };
   });
