@@ -2,10 +2,18 @@
   "version": 2,
   "routes": [
     {
-      "src": "/assets/(.*)",
+      "src": "/assets/.*\\.js",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable",
-        "content-type": "application/javascript"
+        "content-type": "application/javascript; charset=utf-8"
+      },
+      "continue": true
+    },
+    {
+      "src": "/assets/.*\\.css",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable",
+        "content-type": "text/css"
       },
       "continue": true
     },
