@@ -9,7 +9,6 @@ function markdown() {
     name: 'transform-markdown',
     transform(code, id) {
       if (!id.endsWith('.md')) return null;
-
       try {
         const { data, content } = matter(code);
         return {
@@ -28,30 +27,19 @@ function markdown() {
   };
 }
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    markdown()
-  ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
+  plugins: [react(), markdown()],
   build: {
     outDir: 'dist',
-    emptyOutDir: true,
     rollupOptions: {
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-        },
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
       },
-    },
-  },
-  server: {
-    port: 3000,
-    host: true,
-  },
+      output: {
+        entryFileNames: `assets/[name].[hash].js`,
+        chunkFileNames: `assets/[name].[hash].js`,
+        assetFileNames: `assets/[name].[hash].[ext]`
+      }
+    }
+  }
 });
