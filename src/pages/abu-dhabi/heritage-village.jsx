@@ -1,0 +1,262 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaClock, FaMapMarkerAlt, FaStar, FaCalendarAlt, FaInfoCircle, FaHistory, FaTicketAlt, FaLandmark, FaCamera, FaExternalLinkAlt } from 'react-icons/fa';
+
+const HeritageVillagePage = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const funFacts = [
+    "Odtwarza tradycyjne życie emirackie",
+    "Posiada autentyczne namioty beduińskie i miejsca na ognisko",
+    "Mieści tradycyjne warsztaty garncarskie i tkackie",
+    "Prezentuje tradycyjne metody połowu ryb i nurkowania po perły",
+    "Pokazuje starożytne systemy nawadniania (falaj)",
+    "Organizuje regularne pokazy i występy kulturalne"
+  ];
+
+  const galleryImages = [
+    '/images/heritage-village-1.jpg',
+    '/images/heritage-village-2.jpg',
+    '/images/heritage-village-3.jpg',
+    '/images/heritage-village-4.jpg',
+    '/images/heritage-village-5.jpg',
+    '/images/heritage-village-6.jpg',
+    '/images/heritage-village-7.jpg',
+    '/images/heritage-village-8.jpg',
+    '/images/heritage-village.jpg'
+  ];
+
+  const attractions = [
+    {
+      title: "Tradycyjne Warsztaty",
+      description: "Zobacz rzemieślników demonstrujących tradycyjne rzemiosła, w tym garncarstwo, tkactwo i obróbkę metali w autentycznych warsztatach."
+    },
+    {
+      title: "Obóz Beduiński",
+      description: "Doświadcz tradycyjnego stylu życia Beduinów z autentycznymi namiotami, tradycyjnymi miejscami do siedzenia i pokazami przy ognisku."
+    },
+    {
+      title: "Muzeum Dziedzictwa",
+      description: "Zobacz ekspozycje przedstawiające tradycyjne stroje, biżuterię, sprzęt rybacki i przedmioty gospodarstwa domowego z przeszłości ZEA."
+    }
+  ];
+
+  const activities = [
+    "Pokazy rzemiosła",
+    "Zwiedzanie tradycyjnych warsztatów",
+    "Zwiedzanie obozu beduińskiego",
+    "Wycieczki z przewodnikiem",
+    "Próbowanie tradycyjnych rzemiosł",
+    "Zwiedzanie muzeum dziedzictwa",
+    "Zakupy pamiątek",
+    "Oglądanie występów kulturalnych",
+    "Poznawanie historii połowu pereł"
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="relative h-[60vh] overflow-hidden">
+        <img
+          src="/images/heritage-village.jpg"
+          alt="Wioska Dziedzictwa w Abu Zabi"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 flex items-center justify-center text-center">
+          <div className="max-w-4xl px-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+              Wioska Dziedzictwa w Abu Zabi
+            </h1>
+            <p className="text-xl text-white/90 mb-8">
+              Poznaj Tradycyjne Życie Emiratów
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.open('https://www.getyourguide.com/abu-dhabi-l494/abu-dhabi-heritage-village-guided-tour-t389171/?partner_id=19WQ75B&utm_medium=online_publisher&cmp=kd', '_blank')}
+              className="bg-[#8B4513] hover:bg-[#723A0F] text-white font-bold py-4 px-8 rounded-full text-lg transition-colors shadow-lg inline-flex items-center space-x-2"
+            >
+              <FaTicketAlt />
+              <span>Zarezerwuj Wycieczkę</span>
+            </motion.button>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Quick Info */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="bg-white p-6 rounded-xl shadow-sm"
+          >
+            <FaClock className="w-8 h-8 text-[#8B4513] mb-4" />
+            <h3 className="font-semibold mb-2">Godziny Otwarcia</h3>
+            <p className="text-gray-600">9:00 - 16:00</p>
+            <p className="text-gray-500 text-sm">Zamknięte w piątki</p>
+          </motion.div>
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="bg-white p-6 rounded-xl shadow-sm"
+          >
+            <FaTicketAlt className="w-8 h-8 text-[#8B4513] mb-4" />
+            <h3 className="font-semibold mb-2">Wstęp</h3>
+            <p className="text-gray-600">Bezpłatny</p>
+            <p className="text-gray-500 text-sm">Dla wszystkich</p>
+          </motion.div>
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="bg-white p-6 rounded-xl shadow-sm"
+          >
+            <FaStar className="w-8 h-8 text-[#8B4513] mb-4" />
+            <h3 className="font-semibold mb-2">Ocena</h3>
+            <p className="text-gray-600">4.3/5 od odwiedzających</p>
+          </motion.div>
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="bg-white p-6 rounded-xl shadow-sm"
+          >
+            <FaMapMarkerAlt className="w-8 h-8 text-[#8B4513] mb-4" />
+            <h3 className="font-semibold mb-2">Adres</h3>
+            <p className="text-gray-600">Przy Marina Breakwater</p>
+            <p className="text-gray-500 text-sm">Abu Dhabi Corniche</p>
+          </motion.div>
+        </div>
+
+        {/* Description */}
+        <div className="bg-white rounded-xl shadow-sm p-8 mb-12">
+          <h2 className="text-3xl font-semibold mb-6">O Wiosce Dziedzictwa</h2>
+          <p className="text-gray-600 mb-6">
+            Wioska Dziedzictwa to żywe muzeum, które oferuje odwiedzającym wgląd w tradycyjny sposób życia w Zjednoczonych Emiratach Arabskich. Ta zrekonstruowana wioska prezentuje bogate dziedzictwo kulturowe kraju poprzez tradycyjne domostwa, warsztaty i pokazy tradycyjnego rzemiosła i aktywności. Odwiedzający mogą doświadczyć autentycznej kultury emirackiej, od stylu życia Beduinów po tradycje połowu pereł.
+          </p>
+          <div className="flex items-center space-x-2 mb-4">
+            <FaMapMarkerAlt className="text-[#8B4513]" />
+            <span className="text-gray-600">
+              Przy Marina Mall, Breakwater, Abu Dhabi, Zjednoczone Emiraty Arabskie
+            </span>
+          </div>
+        </div>
+
+        {/* Gallery */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">Galeria</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {galleryImages.map((image, index) => (
+              <motion.div
+                key={index}
+                className="relative aspect-square overflow-hidden rounded-lg cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setSelectedImage(image)}
+              >
+                <img
+                  src={image}
+                  alt={`Wioska Dziedzictwa - ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Image Modal */}
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedImage(null)}
+              className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
+            >
+              <motion.div
+                initial={{ scale: 0.5 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.5 }}
+                className="relative max-w-4xl w-full h-auto"
+                onClick={e => e.stopPropagation()}
+              >
+                <img
+                  src={selectedImage}
+                  alt="Wioska Dziedzictwa"
+                  className="w-full h-auto rounded-lg"
+                />
+                <button
+                  onClick={() => setSelectedImage(null)}
+                  className="absolute top-4 right-4 text-white bg-[#8B4513] rounded-full p-2 hover:bg-[#723A0F] transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Main Attractions */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">Główne Atrakcje</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {attractions.map((attraction, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold mb-2">{attraction.title}</h3>
+                <p className="text-gray-600">{attraction.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* GetYourGuide Widget */}
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
+          <h2 className="text-2xl font-bold mb-6">Zarezerwuj Wycieczkę</h2>
+          <div 
+            data-gyg-href="https://widget.getyourguide.com/default/activities.frame" 
+            data-gyg-locale-code="pl-PL" 
+            data-gyg-widget="activities" 
+            data-gyg-number-of-items="3" 
+            data-gyg-cmp="kd-attracion" 
+            data-gyg-partner-id="19WQ75B" 
+            data-gyg-tour-ids="389171"
+          >
+            <span>Powered by <a target="_blank" rel="sponsored" href="https://www.getyourguide.com/abu-dhabi-l494/">GetYourGuide</a></span>
+          </div>
+        </div>
+
+        {/* Activities */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">Co Można Robić</h2>
+          <div className="bg-white p-8 rounded-lg shadow-md">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {activities.map((activity, index) => (
+                <div key={index} className="flex items-start space-x-2">
+                  <FaLandmark className="text-[#8B4513] mt-1" />
+                  <p className="text-gray-600">{activity}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Fun Facts */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">Ciekawostki</h2>
+          <div className="bg-white p-8 rounded-lg shadow-md">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {funFacts.map((fact, index) => (
+                <div key={index} className="flex items-start space-x-2">
+                  <FaInfoCircle className="text-[#8B4513] mt-1" />
+                  <p className="text-gray-600">{fact}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HeritageVillagePage;

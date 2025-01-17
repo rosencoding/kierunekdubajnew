@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold-500/50 rounded-full hover:bg-gold-500/70 transition-colors;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .heading-gradient {
+    @apply bg-gradient-to-r from-gold-500 to-gold-600 bg-clip-text text-transparent;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6;
+  }
+
+  .btn {
+    @apply px-6 py-2 rounded-full font-medium transition-all transform hover:scale-105;
+  }
+
+  .btn-primary {
+    @apply btn bg-gold-500 text-white hover:bg-gold-600;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-gray-900 hover:bg-gray-50 border border-gray-200;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-gold-500 focus:border-transparent;
+  }
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Custom color variables */
+:root {
+  --color-gold-50: #fff9e6;
+  --color-gold-100: #fff3cc;
+  --color-gold-200: #ffe799;
+  --color-gold-300: #ffdb66;
+  --color-gold-400: #ffcf33;
+  --color-gold-500: #ffc300;
+  --color-gold-600: #cc9c00;
+  --color-gold-700: #997500;
+  --color-gold-800: #664e00;
+  --color-gold-900: #332700;
+}

@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /test/
+Disallow: /draft/
+Disallow: /_*
+Disallow: /*?*
+
+# Sitemap
+Sitemap: https://kierunekdubaj.pl/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
