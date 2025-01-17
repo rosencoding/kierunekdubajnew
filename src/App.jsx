@@ -117,6 +117,8 @@ import {
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
+import NotFoundPage from './pages/NotFoundPage';
+
 function AppContent() {
   useScrollToTop();
 
@@ -224,6 +226,9 @@ function AppContent() {
           <Route path="/abu-dhabi/al-ain-oasis" element={<AlAinOasisPage />} />
           <Route path="/abu-dhabi/emirates-auto-museum" element={<EmiratesAutoMuseumPage />} />
           <Route path="/abu-dhabi/louvre-abu-dhabi" element={<LouvreAbuDhabiPage />} />
+
+          {/* 404 Route - Must be last */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </div>
