@@ -1,7 +1,27 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "routes": [
+    {
+      "src": "/abu-dhabi",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/atrakcje/(.*)",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/blog/(.*)",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/plan-podrozy",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "cleanUrls": true
+  "framework": "vite"
 }
