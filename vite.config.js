@@ -21,12 +21,11 @@ function markdown() {
             const content = ${JSON.stringify(content)};
             export { metadata, content };
             export default { metadata, content };
-          `,
-          map: { mappings: '' }
+          `
         };
       } catch (error) {
         console.error('Error processing markdown:', error);
-        throw error;
+        return null;
       }
     }
   };
@@ -34,7 +33,6 @@ function markdown() {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/my-app/',
   plugins: [
     react(),
     markdown()
@@ -49,26 +47,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor': ['react', 'react-dom'],
-          'markdown': ['gray-matter']
-        }
-      }
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
     },
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    },
-    chunkSizeWarningLimit: 1000,
-    cssCodeSplit: true,
-    sourcemap: false
   },
-  server: {
-    cors: true,
-    compression: true,
-    port: 3000,
-    base: '/my-app/'
-  }
 });
