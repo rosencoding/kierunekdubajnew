@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import usePageTitle from '../hooks/usePageTitle';
@@ -7,48 +8,8 @@ import usePageTitle from '../hooks/usePageTitle';
 const PageLayout = ({ children }) => {
   usePageTitle();
 
-  useEffect(() => {
-    const loadGYGScript = async () => {
-      try {
-        // Remove any existing GYG scripts
-        const existingScripts = document.querySelectorAll('script[src*="getyourguide"]');
-        existingScripts.forEach(script => script.remove());
-
-        // Create and load the new script
-        const script = document.createElement('script');
-        script.src = 'https://widget.getyourguide.com/dist/pa.umd.production.min.js';
-        script.async = true;
-        script.defer = true;
-        script.crossOrigin = 'anonymous';
-        script.setAttribute('data-gyg-partner-id', '19WQ75B');
-        
-        script.onerror = (error) => {
-          console.error('Error loading GetYourGuide widget:', error);
-        };
-
-        script.onload = () => {
-          if (window.GetYourGuide) {
-            window.GetYourGuide.widgetEvents.initializeWidget();
-          }
-        };
-
-        document.body.appendChild(script);
-
-        return () => {
-          if (script.parentNode) {
-            script.parentNode.removeChild(script);
-          }
-        };
-      } catch (error) {
-        console.error('Failed to initialize GetYourGuide widget:', error);
-      }
-    };
-
-    loadGYGScript();
-  }, []);
-
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Helmet>
         <meta name="google-site-verification" content="F6Lb6dQqoyYufmrte8-8s1LIM5lIDahURjdBan-T1vY" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ2N5KC7J1"></script>
@@ -61,16 +22,14 @@ const PageLayout = ({ children }) => {
           `}
         </script>
       </Helmet>
-      <div className="flex min-h-screen flex-col bg-white">
-        <Navbar />
-        <main className="flex-grow pt-16"> 
-          <div className="container mx-auto px-4">
-            {children}
-          </div>
-        </main>
-        <Footer />
-      </div>
-    </>
+      <Navbar />
+      <main className="flex-grow">
+        <div className="container mx-auto px-4">
+          <Outlet />
+        </div>
+      </main>
+      <Footer />
+    </div>
   );
 };
 

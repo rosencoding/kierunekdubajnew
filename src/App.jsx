@@ -144,6 +144,8 @@ const router = createBrowserRouter(
       <Route path="dzielnice" element={<Dzielnice />} />
       <Route path="kultura-i-zwyczaje" element={<KulturaIZwyczaje />} />
       <Route path="praktyczne-porady" element={<PraktycznePorady />} />
+      <Route path="poznaj-dubaj" element={<PoznajDubajPage />} />
+      <Route path="abu-dhabi" element={<AbuDhabiPage />} />
       <Route path="atrakcje">
         <Route path="burj-khalifa" element={<BurjKhalifaPage />} />
         <Route path="dubai-mall" element={<DubaiMallPage />} />
@@ -161,11 +163,7 @@ function App() {
   return (
     <HelmetProvider>
       <DocumentTitleManager>
-        <PageLayout>
-          <Navbar />
-          <RouterProvider router={router} />
-          <Footer />
-        </PageLayout>
+        <RouterProvider router={router} />
       </DocumentTitleManager>
     </HelmetProvider>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -31,22 +32,28 @@ const Hero = () => {
             </p>
 
             <div className="mt-10 flex justify-center gap-4">
-              <motion.a
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="/poznaj-dubaj"
-                className="inline-block bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full transition-colors"
               >
-                Poznaj Dubaj
-              </motion.a>
-              <motion.a
+                <Link
+                  to="/poznaj-dubaj"
+                  className="inline-block bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full transition-colors"
+                >
+                  Poznaj Dubaj
+                </Link>
+              </motion.div>
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="/abu-dhabi"
-                className="inline-block bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-8 rounded-full transition-colors"
               >
-                Odkryj Abu Dhabi
-              </motion.a>
+                <Link
+                  to="/abu-dhabi"
+                  className="inline-block bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-8 rounded-full transition-colors"
+                >
+                  Odkryj Abu Dhabi
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         </div>
