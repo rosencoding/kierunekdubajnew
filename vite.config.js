@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import matter from 'gray-matter';
 
 // Markdown plugin
 function markdown() {
@@ -27,29 +26,29 @@ function markdown() {
   };
 }
 
+import matter from 'gray-matter';
+
 export default defineConfig({
   plugins: [react(), markdown()],
   build: {
     outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
       },
       output: {
         assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split('.')
-          const ext = info[info.length - 1]
-          if (/\.(css)$/i.test(assetInfo.name)) {
-            return `assets/[name].[hash][extname]`
+          let extType = assetInfo.name.split('.').at(1);
+          if (/css/i.test(extType)) {
+            return 'assets/css/[name][extname]';
           }
-          return `assets/[name].[hash][extname]`
+          return 'assets/[name][extname]';
         },
-        chunkFileNames: 'assets/[name].[hash].js',
-        entryFileNames: 'assets/[name].[hash].js',
-      },
-    },
-    assetsDir: 'assets',
-    manifest: true,
+        chunkFileNames: 'assets/js/[name].js',
+        entryFileNames: 'assets/js/[name].js',
+      }
+    }
   },
   server: {
     headers: {
