@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaClock, FaMapMarkerAlt, FaStar, FaCalendarAlt, FaInfoCircle, FaTicketAlt, FaCamera, FaBook, FaLandmark } from 'react-icons/fa';
+import GetYourGuideWidget from '../components/GetYourGuideWidget';
 
 const QasrAlWatanPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -43,21 +44,6 @@ const QasrAlWatanPage = () => {
       description: "Interaktywna wystawa prezentująca wkład świata arabskiego w różne dziedziny nauki."
     }
   ];
-
-  // GetYourGuide Widget
-  React.useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://widget.getyourguide.com/dist/pa.umd.production.min.js';
-    script.async = true;
-    document.body.appendChild(script);
-    
-    return () => {
-      const existingScript = document.querySelector(`script[src="${script.src}"]`);
-      if (existingScript && existingScript.parentNode) {
-        existingScript.parentNode.removeChild(existingScript);
-      }
-    };
-  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -211,19 +197,11 @@ const QasrAlWatanPage = () => {
         </AnimatePresence>
 
         {/* GetYourGuide Widget */}
-        <div className="bg-white rounded-xl shadow-sm p-8 mb-12">
-          <h2 className="text-3xl font-semibold mb-6">Bilety i Wycieczki</h2>
-          <div 
-            data-gyg-href="https://widget.getyourguide.com/default/activities.frame" 
-            data-gyg-locale-code="pl-PL" 
-            data-gyg-widget="activities" 
-            data-gyg-number-of-items="4" 
-            data-gyg-cmp="qasr-al-watan-ad" 
-            data-gyg-partner-id="19WQ75B" 
-            data-gyg-tour-ids="386339,386340,386341,386342"
-          >
-            <span>Powered by <a target="_blank" rel="sponsored" href="https://www.getyourguide.com/abu-dhabi-l494/">GetYourGuide</a></span>
-          </div>
+        <div className="my-8">
+          <GetYourGuideWidget
+            tourIds="411488,412274,519121,482006,140175,301193,505703,90195"
+            numItems={8}
+          />
         </div>
 
         {/* Fun Facts */}
