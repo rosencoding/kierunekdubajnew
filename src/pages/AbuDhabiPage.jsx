@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaClock, FaDollarSign, FaPlus, FaCheck, FaInfoCircle } from 'react-icons/fa';
 import { ItineraryContext } from '../contexts/ItineraryContext';
@@ -6,6 +6,15 @@ import { Link } from 'react-router-dom';
 import usePageTitle from '../hooks/usePageTitle';
 
 const AbuDhabiPage = () => {
+  console.log('AbuDhabiPage mounting');
+  
+  useEffect(() => {
+    console.log('AbuDhabiPage useEffect running');
+    return () => {
+      console.log('AbuDhabiPage unmounting');
+    };
+  }, []);
+
   usePageTitle('Abu Dhabi - KierunekDubaj.pl');
   const { itineraryItems, addToItinerary, removeFromItinerary } = useContext(ItineraryContext);
   const [selectedCategory, setSelectedCategory] = useState('all');

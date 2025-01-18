@@ -31,22 +31,26 @@ import NotFoundPage from './pages/NotFoundPage';
 FUTURE_FLAGS.v7_startTransition = true;
 FUTURE_FLAGS.v7_relativeSplatPath = true;
 
-const HomePage = () => (
-  <>
-    <Hero />
-    <MainAttractions />
-    <AttractionsList />
-  </>
-);
+const HomePage = () => {
+  console.log('HomePage rendering');
+  return (
+    <>
+      <Hero />
+      <MainAttractions />
+      <AttractionsList />
+    </>
+  );
+};
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <PageLayout />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         index: true,
-        element: <HomePage />
+        element: <HomePage />,
       },
       {
         path: "blog",
@@ -124,7 +128,7 @@ const router = createBrowserRouter([
 
 function App() {
   useScrollToTop();
-
+  console.log('App rendering');
   return (
     <HelmetProvider>
       <DocumentTitleManager>

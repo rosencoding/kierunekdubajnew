@@ -6,7 +6,12 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const handleNavigation = (path) => {
-    navigate(path);
+    try {
+      console.log('Navigating to:', path);
+      navigate(path, { replace: false });
+    } catch (error) {
+      console.error('Navigation error:', error);
+    }
   };
 
   return (
@@ -41,7 +46,10 @@ const Hero = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => handleNavigation('/poznaj-dubaj')}
+                onClick={() => {
+                  console.log('Poznaj Dubaj button clicked');
+                  handleNavigation('/poznaj-dubaj');
+                }}
                 className="inline-block bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full transition-colors"
               >
                 Poznaj Dubaj
@@ -49,7 +57,10 @@ const Hero = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => handleNavigation('/abu-dhabi')}
+                onClick={() => {
+                  console.log('Abu Dhabi button clicked');
+                  handleNavigation('/abu-dhabi');
+                }}
                 className="inline-block bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-8 rounded-full transition-colors"
               >
                 Odkryj Abu Dhabi
