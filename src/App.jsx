@@ -36,13 +36,18 @@ const HomePage = () => {
   );
 };
 
-const App = () => {
+const ScrollToTop = () => {
   useScrollToTop();
+  return null;
+};
+
+const App = () => {
   console.log('App rendering');
   
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<PageLayout />}>
             <Route index element={<HomePage />} />
