@@ -17,16 +17,22 @@ const BlogList = ({ posts, categories }) => {
     });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Blog o Dubaju</h1>
-        <p className="text-xl text-gray-600">
-          Odkryj fascynujący świat Dubaju poprzez nasze artykuły
-        </p>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="text-4xl font-bold text-gray-900 mb-6">Blog o Dubaju</h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Odkryj fascynujący świat Dubaju poprzez nasze artykuły
+          </p>
+        </motion.div>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-4 mb-8 justify-between items-center">
+      <div className="flex flex-wrap gap-4 mb-12 justify-between items-center bg-white p-6 rounded-lg shadow-sm">
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setSelectedCategory('all')}

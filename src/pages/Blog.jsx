@@ -47,15 +47,23 @@ const Blog = () => {
   }, [postId]);
 
   if (loading) {
-    return <div className="min-h-screen pt-20 px-4">Ładowanie...</div>;
+    return (
+      <div className="min-h-screen pt-24 px-4 flex items-center justify-center">
+        <div className="text-xl text-gray-600">Ładowanie...</div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="min-h-screen pt-20 px-4 text-red-600">{error}</div>;
+    return (
+      <div className="min-h-screen pt-24 px-4 flex items-center justify-center">
+        <div className="text-xl text-red-600">{error}</div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen bg-gray-50">
       {postId && currentPost ? (
         <BlogPost post={currentPost} />
       ) : (
