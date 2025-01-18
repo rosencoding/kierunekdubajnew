@@ -1,6 +1,5 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
-import { FUTURE_FLAGS } from '@remix-run/router';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import useScrollToTop from './hooks/useScrollToTop';
 import PageLayout from './components/PageLayout';
@@ -26,10 +25,6 @@ import PoznajDubajPage from './pages/PoznajDubajPage';
 import AbuDhabiPage from './pages/AbuDhabiPage';
 import NotFoundPage from './pages/NotFoundPage';
 
-// Configure future flags
-FUTURE_FLAGS.v7_startTransition = true;
-FUTURE_FLAGS.v7_relativeSplatPath = true;
-
 const HomePage = () => {
   console.log('HomePage rendering');
   return (
@@ -50,6 +45,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "abu-dhabi",
+        element: <AbuDhabiPage />,
+      },
+      {
+        path: "poznaj-dubaj",
+        element: <PoznajDubajPage />,
       },
       {
         path: "blog",
@@ -92,37 +95,9 @@ const router = createBrowserRouter([
       {
         path: "praktyczne-porady",
         element: <PraktycznePorady />
-      },
-      {
-        path: "poznaj-dubaj",
-        element: <PoznajDubajPage />
-      },
-      {
-        path: "abu-dhabi",
-        element: <AbuDhabiPage />
-      },
-      {
-        path: "atrakcje/burj-khalifa",
-        element: <BurjKhalifaPage />
-      },
-      {
-        path: "atrakcje/dubai-mall",
-        element: <DubaiMallPage />
-      },
-      {
-        path: "atrakcje/palm-jumeirah",
-        element: <PalmJumeirahPage />
-      },
-      {
-        path: "atrakcje/dubai-frame",
-        element: <DubaiFramePage />
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />
       }
-    ]
-  }
+    ],
+  },
 ]);
 
 const App = () => {
