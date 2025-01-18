@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import usePageTitle from '../hooks/usePageTitle';
 
 const PageLayout = ({ children }) => {
+  usePageTitle(); // Keep the title management
+
   useEffect(() => {
     const loadGYGScript = async () => {
       try {
@@ -47,7 +50,7 @@ const PageLayout = ({ children }) => {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Helmet>
         <meta name="google-site-verification" content="F6Lb6dQqoyYufmrte8-8s1LIM5lIDahURjdBan-T1vY" />
         {/* Google Analytics */}
@@ -61,14 +64,12 @@ const PageLayout = ({ children }) => {
           `}
         </script>
       </Helmet>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
-      </div>
-    </>
+      <Navbar />
+      <main className="flex-grow">
+        {children}
+      </main>
+      <Footer />
+    </div>
   );
 };
 
