@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useLocation, useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -121,7 +121,7 @@ import { motion } from 'framer-motion';
 
 import NotFoundPage from './pages/NotFoundPage';
 
-const routeConfig = [
+const routes = [
   {
     path: '/',
     element: (
@@ -132,59 +132,59 @@ const routeConfig = [
         <AttractionsList />
         <Footer />
       </PageLayout>
-    )
+    ),
   },
   {
     path: '/blog/*',
-    element: <PageLayout><Navbar /><Blog /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><Blog /><Footer /></PageLayout>,
   },
   {
     path: '/plan-podrozy',
-    element: <PageLayout><Navbar /><PlanPodrozy /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><PlanPodrozy /><Footer /></PageLayout>,
   },
   {
     path: '/faq',
-    element: <PageLayout><Navbar /><FAQPage /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><FAQPage /><Footer /></PageLayout>,
   },
   {
     path: '/podstawowe-informacje',
-    element: <PageLayout><Navbar /><PodstawoweInformacje /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><PodstawoweInformacje /><Footer /></PageLayout>,
   },
   {
     path: '/kiedy-jechac',
-    element: <PageLayout><Navbar /><KiedyJechac /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><KiedyJechac /><Footer /></PageLayout>,
   },
   {
     path: '/transport',
-    element: <PageLayout><Navbar /><Transport /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><Transport /><Footer /></PageLayout>,
   },
   {
     path: '/dzielnice',
-    element: <PageLayout><Navbar /><Dzielnice /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><Dzielnice /><Footer /></PageLayout>,
   },
   {
     path: '/kultura-i-zwyczaje',
-    element: <PageLayout><Navbar /><KulturaIZwyczaje /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><KulturaIZwyczaje /><Footer /></PageLayout>,
   },
   {
     path: '/praktyczne-porady',
-    element: <PageLayout><Navbar /><PraktycznePorady /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><PraktycznePorady /><Footer /></PageLayout>,
   },
   {
     path: '/atrakcje/burj-khalifa',
-    element: <PageLayout><Navbar /><BurjKhalifaPage /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><BurjKhalifaPage /><Footer /></PageLayout>,
   },
   {
     path: '/atrakcje/dubai-mall',
-    element: <PageLayout><Navbar /><DubaiMallPage /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><DubaiMallPage /><Footer /></PageLayout>,
   },
   {
     path: '/atrakcje/palm-jumeirah',
-    element: <PageLayout><Navbar /><PalmJumeirahPage /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><PalmJumeirahPage /><Footer /></PageLayout>,
   },
   {
     path: '/atrakcje/dubai-frame',
-    element: <PageLayout><Navbar /><DubaiFramePage /><Footer /></PageLayout>
+    element: <PageLayout><Navbar /><DubaiFramePage /><Footer /></PageLayout>,
   },
   // Add other routes...
   {
@@ -195,14 +195,13 @@ const routeConfig = [
           <h1>404 - Strona nie znaleziona</h1>
         </div>
       </PageLayout>
-    )
-  }
+    ),
+  },
 ];
 
 function App() {
   useScrollToTop();
-  const location = useLocation();
-  const element = useRoutes(routeConfig);
+  const element = useRoutes(routes);
 
   return (
     <HelmetProvider>
