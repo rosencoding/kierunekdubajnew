@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import { FUTURE_FLAGS } from '@remix-run/router';
 import { HelmetProvider } from 'react-helmet-async';
 import DocumentTitleManager from './components/DocumentTitleManager';
@@ -31,39 +31,96 @@ import NotFoundPage from './pages/NotFoundPage';
 FUTURE_FLAGS.v7_startTransition = true;
 FUTURE_FLAGS.v7_relativeSplatPath = true;
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route element={<PageLayout />}>
-      <Route path="/" element={
-        <>
-          <Hero />
-          <MainAttractions />
-          <AttractionsList />
-        </>
-      } />
-      <Route path="blog" element={<Blog />}>
-        <Route path=":postId" element={<Blog />} />
-      </Route>
-      <Route path="plan-podrozy" element={<PlanPodrozy />} />
-      <Route path="faq" element={<FAQPage />} />
-      <Route path="podstawowe-informacje" element={<PodstawoweInformacje />} />
-      <Route path="kiedy-jechac" element={<KiedyJechac />} />
-      <Route path="transport" element={<Transport />} />
-      <Route path="dzielnice" element={<Dzielnice />} />
-      <Route path="kultura-i-zwyczaje" element={<KulturaIZwyczaje />} />
-      <Route path="praktyczne-porady" element={<PraktycznePorady />} />
-      <Route path="poznaj-dubaj" element={<PoznajDubajPage />} />
-      <Route path="abu-dhabi" element={<AbuDhabiPage />} />
-      <Route path="atrakcje">
-        <Route path="burj-khalifa" element={<BurjKhalifaPage />} />
-        <Route path="dubai-mall" element={<DubaiMallPage />} />
-        <Route path="palm-jumeirah" element={<PalmJumeirahPage />} />
-        <Route path="dubai-frame" element={<DubaiFramePage />} />
-      </Route>
-      <Route path="*" element={<NotFoundPage />} />
-    </Route>
-  )
+const HomePage = () => (
+  <>
+    <Hero />
+    <MainAttractions />
+    <AttractionsList />
+  </>
 );
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <PageLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />
+      },
+      {
+        path: "blog",
+        element: <Blog />,
+        children: [
+          {
+            path: ":postId",
+            element: <Blog />
+          }
+        ]
+      },
+      {
+        path: "plan-podrozy",
+        element: <PlanPodrozy />
+      },
+      {
+        path: "faq",
+        element: <FAQPage />
+      },
+      {
+        path: "podstawowe-informacje",
+        element: <PodstawoweInformacje />
+      },
+      {
+        path: "kiedy-jechac",
+        element: <KiedyJechac />
+      },
+      {
+        path: "transport",
+        element: <Transport />
+      },
+      {
+        path: "dzielnice",
+        element: <Dzielnice />
+      },
+      {
+        path: "kultura-i-zwyczaje",
+        element: <KulturaIZwyczaje />
+      },
+      {
+        path: "praktyczne-porady",
+        element: <PraktycznePorady />
+      },
+      {
+        path: "poznaj-dubaj",
+        element: <PoznajDubajPage />
+      },
+      {
+        path: "abu-dhabi",
+        element: <AbuDhabiPage />
+      },
+      {
+        path: "atrakcje/burj-khalifa",
+        element: <BurjKhalifaPage />
+      },
+      {
+        path: "atrakcje/dubai-mall",
+        element: <DubaiMallPage />
+      },
+      {
+        path: "atrakcje/palm-jumeirah",
+        element: <PalmJumeirahPage />
+      },
+      {
+        path: "atrakcje/dubai-frame",
+        element: <DubaiFramePage />
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />
+      }
+    ]
+  }
+]);
 
 function App() {
   useScrollToTop();

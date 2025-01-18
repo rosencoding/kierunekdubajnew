@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import usePageTitle from '../hooks/usePageTitle';
 
-const PageLayout = ({ children }) => {
+const PageLayout = () => {
   usePageTitle();
 
   return (
