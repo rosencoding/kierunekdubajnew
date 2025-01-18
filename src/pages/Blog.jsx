@@ -5,6 +5,7 @@ import BlogPost from '../components/BlogPost';
 import { getSortedPostsData, getPostData, getAllCategories } from '../utils/blogUtils';
 import usePageTitle from '../hooks/usePageTitle';
 
+// Trigger Vercel deployment - 2025-01-18
 const Blog = () => {
   const { postId } = useParams();
   const [currentPost, setCurrentPost] = useState(null);
