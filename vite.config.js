@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import matter from 'gray-matter';
 
 // Markdown plugin
 function markdown() {
@@ -26,36 +27,43 @@ function markdown() {
   };
 }
 
-import matter from 'gray-matter';
-
 export default defineConfig({
   plugins: [react(), markdown()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    sourcemap: true,
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-      },
       output: {
         assetFileNames: (assetInfo) => {
-          let extType = assetInfo.name.split('.').at(1);
-          if (/css/i.test(extType)) {
-            return 'assets/css/[name][extname]';
+          let extType = assetInfo.name.split('.')[1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            extType = 'img';
+          } else if (/woff|woff2|ttf|otf|eot/i.test(extType)) {
+            extType = 'fonts';
           }
-          return 'assets/[name][extname]';
+          return `assets/${extType}/[name][extname]`;
         },
-        chunkFileNames: 'assets/js/[name].js',
-        entryFileNames: 'assets/js/[name].js',
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
       }
     }
   },
-  server: {
-    headers: {
-      'Content-Type': {
-        '.js': 'application/javascript',
-        '.css': 'text/css',
-      },
-    },
+  css: {
+    postcss: {
+      plugins: [
+        require('tailwindcss'),
+        require('autoprefixer'),
+      ],
+    }
   },
+  server: {
+    port: 3000,
+    open: true
+  }
 });
