@@ -1,31 +1,69 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { blogPosts } from '../data/blogPosts';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import BlogList from './BlogList';
 
 const Blog = () => {
+  const [posts, setPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { postId } = useParams();
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const postsData = await import.meta.glob('/src/content/blog/*.md');
+        const allPosts = await Promise.all(
+          Object.entries(postsData).map(async ([path, loader]) => {
+            const post = await loader();
+            const id = path.split('/').pop().replace('.md', '');
+            return {
+              id,
+              ...post.metadata,
+              content: post.content,
+            };
+          })
+        );
+
+        const sortedPosts = allPosts.sort((a, b) => 
+          new Date(b.date) - new Date(a.date)
+        );
+
+        setPosts(sortedPosts);
+        
+        // Extract unique categories
+        const uniqueCategories = [...new Set(sortedPosts.map(post => post.category))];
+        setCategories(uniqueCategories);
+        
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    loadPosts();
+  }, []);
+
+  if (loading) {
+    return <div className="min-h-screen pt-20 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+    </div>;
+  }
+
+  if (error) {
+    return <div className="min-h-screen pt-20 flex items-center justify-center">
+      <div className="text-red-500">Error: {error}</div>
+    </div>;
+  }
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8 text-center">Blog KierunekDubaj.pl</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogPosts.map((post) => (
-          <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
-            <div className="p-6">
-              <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-              <p className="text-gray-600 mb-4">{post.excerpt}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-500">{post.date}</span>
-                <Link
-                  to={`/blog/${post.slug}`}
-                  className="text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  Czytaj więcej →
-                </Link>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
+    <div className="min-h-screen pt-20">
+      {postId ? (
+        <BlogPost post={posts.find(p => p.id === postId)} />
+      ) : (
+        <BlogList posts={posts} categories={categories} />
+      )}
     </div>
   );
 };

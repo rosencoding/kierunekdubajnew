@@ -21,19 +21,14 @@ const Blog = () => {
         setLoading(true);
         setError(null);
 
-        // Load all posts and categories
         const loadedPosts = getSortedPostsData();
-        console.log('Loaded posts:', loadedPosts);
         setPosts(loadedPosts);
 
         const loadedCategories = getAllCategories();
-        console.log('Loaded categories:', loadedCategories);
         setCategories(loadedCategories);
 
-        // Load specific post if postId is present
         if (postId) {
           const post = await getPostData(postId);
-          console.log('Loaded specific post:', post);
           if (!post) {
             setError('Nie znaleziono artykułu');
           } else {
@@ -52,27 +47,22 @@ const Blog = () => {
   }, [postId]);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
+    return <div className="min-h-screen pt-20 px-4">Ładowanie...</div>;
   }
 
   if (error) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <h1 className="text-2xl font-bold text-red-600 mb-4">Błąd</h1>
-        <p className="text-gray-600">{error}</p>
-      </div>
-    );
+    return <div className="min-h-screen pt-20 px-4 text-red-600">{error}</div>;
   }
 
-  if (postId && currentPost) {
-    return <BlogPost post={currentPost} />;
-  }
-
-  return <BlogList posts={posts} categories={categories} />;
+  return (
+    <div className="min-h-screen pt-20">
+      {postId && currentPost ? (
+        <BlogPost post={currentPost} />
+      ) : (
+        <BlogList posts={posts} categories={categories} />
+      )}
+    </div>
+  );
 };
 
 export default Blog;

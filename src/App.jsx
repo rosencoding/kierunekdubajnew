@@ -1,5 +1,6 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from 'react-router-dom';
+import { FUTURE_FLAGS } from '@remix-run/router';
 import { HelmetProvider } from 'react-helmet-async';
 import DocumentTitleManager from './components/DocumentTitleManager';
 import useScrollToTop from './hooks/useScrollToTop';
@@ -118,46 +119,53 @@ import { motion } from 'framer-motion';
 
 import NotFoundPage from './pages/NotFoundPage';
 
+// Configure future flags
+FUTURE_FLAGS.v7_startTransition = true;
+FUTURE_FLAGS.v7_relativeSplatPath = true;
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<PageLayout />}>
+      <Route index element={
+        <>
+          <Hero />
+          <MainAttractions />
+          <AttractionsList />
+        </>
+      } />
+      <Route path="blog" element={<Blog />}>
+        <Route path=":postId" element={<Blog />} />
+      </Route>
+      <Route path="plan-podrozy" element={<PlanPodrozy />} />
+      <Route path="faq" element={<FAQPage />} />
+      <Route path="podstawowe-informacje" element={<PodstawoweInformacje />} />
+      <Route path="kiedy-jechac" element={<KiedyJechac />} />
+      <Route path="transport" element={<Transport />} />
+      <Route path="dzielnice" element={<Dzielnice />} />
+      <Route path="kultura-i-zwyczaje" element={<KulturaIZwyczaje />} />
+      <Route path="praktyczne-porady" element={<PraktycznePorady />} />
+      <Route path="atrakcje">
+        <Route path="burj-khalifa" element={<BurjKhalifaPage />} />
+        <Route path="dubai-mall" element={<DubaiMallPage />} />
+        <Route path="palm-jumeirah" element={<PalmJumeirahPage />} />
+        <Route path="dubai-frame" element={<DubaiFramePage />} />
+      </Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Route>
+  )
+);
+
 function App() {
   useScrollToTop();
-  const location = useLocation();
 
   return (
     <HelmetProvider>
       <DocumentTitleManager>
-        <div className="min-h-screen flex flex-col">
+        <PageLayout>
           <Navbar />
-          <Routes>
-            <Route path="/" element={
-              <PageLayout>
-                <Hero />
-                <MainAttractions />
-                <AttractionsList />
-              </PageLayout>
-            } />
-            <Route path="/blog/*" element={<PageLayout><Blog /></PageLayout>} />
-            <Route path="/plan-podrozy" element={<PageLayout><PlanPodrozy /></PageLayout>} />
-            <Route path="/faq" element={<PageLayout><FAQPage /></PageLayout>} />
-            <Route path="/podstawowe-informacje" element={<PageLayout><PodstawoweInformacje /></PageLayout>} />
-            <Route path="/kiedy-jechac" element={<PageLayout><KiedyJechac /></PageLayout>} />
-            <Route path="/transport" element={<PageLayout><Transport /></PageLayout>} />
-            <Route path="/dzielnice" element={<PageLayout><Dzielnice /></PageLayout>} />
-            <Route path="/kultura-i-zwyczaje" element={<PageLayout><KulturaIZwyczaje /></PageLayout>} />
-            <Route path="/praktyczne-porady" element={<PageLayout><PraktycznePorady /></PageLayout>} />
-            <Route path="/atrakcje/burj-khalifa" element={<PageLayout><BurjKhalifaPage /></PageLayout>} />
-            <Route path="/atrakcje/dubai-mall" element={<PageLayout><DubaiMallPage /></PageLayout>} />
-            <Route path="/atrakcje/palm-jumeirah" element={<PageLayout><PalmJumeirahPage /></PageLayout>} />
-            <Route path="/atrakcje/dubai-frame" element={<PageLayout><DubaiFramePage /></PageLayout>} />
-            <Route path="*" element={
-              <PageLayout>
-                <div className="container mx-auto px-4 py-8">
-                  <h1>404 - Strona nie znaleziona</h1>
-                </div>
-              </PageLayout>
-            } />
-          </Routes>
+          <RouterProvider router={router} />
           <Footer />
-        </div>
+        </PageLayout>
       </DocumentTitleManager>
     </HelmetProvider>
   );

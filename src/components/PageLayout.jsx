@@ -5,7 +5,7 @@ import Footer from './Footer';
 import usePageTitle from '../hooks/usePageTitle';
 
 const PageLayout = ({ children }) => {
-  usePageTitle(); // Keep the title management
+  usePageTitle();
 
   useEffect(() => {
     const loadGYGScript = async () => {
@@ -22,12 +22,10 @@ const PageLayout = ({ children }) => {
         script.crossOrigin = 'anonymous';
         script.setAttribute('data-gyg-partner-id', '19WQ75B');
         
-        // Add error handling
         script.onerror = (error) => {
           console.error('Error loading GetYourGuide widget:', error);
         };
 
-        // Initialize widget after script loads
         script.onload = () => {
           if (window.GetYourGuide) {
             window.GetYourGuide.widgetEvents.initializeWidget();
@@ -50,10 +48,9 @@ const PageLayout = ({ children }) => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <>
       <Helmet>
         <meta name="google-site-verification" content="F6Lb6dQqoyYufmrte8-8s1LIM5lIDahURjdBan-T1vY" />
-        {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ2N5KC7J1"></script>
         <script>
           {`
@@ -64,14 +61,16 @@ const PageLayout = ({ children }) => {
           `}
         </script>
       </Helmet>
-      <Navbar />
-      <main className="flex-grow">
-        <div className="container mx-auto px-4">
-          {children}
-        </div>
-      </main>
-      <Footer />
-    </div>
+      <div className="flex min-h-screen flex-col bg-white">
+        <Navbar />
+        <main className="flex-grow pt-16"> 
+          <div className="container mx-auto px-4">
+            {children}
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 
