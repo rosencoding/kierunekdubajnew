@@ -1,19 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
-  const navigate = useNavigate();
-
-  const handleNavigation = (path) => {
-    try {
-      console.log('Navigating to:', path);
-      navigate(path, { replace: false });
-    } catch (error) {
-      console.error('Navigation error:', error);
-    }
-  };
-
   return (
     <div className="relative bg-gray-900">
       {/* Background Image */}
@@ -41,31 +29,6 @@ const Hero = () => {
               Poznaj najpiękniejsze miejsca, zaplanuj swoją podróż i odkryj wszystko, 
               co musisz wiedzieć o Zjednoczonych Emiratach Arabskich
             </p>
-
-            <div className="mt-10 flex justify-center gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  console.log('Poznaj Dubaj button clicked');
-                  handleNavigation('/poznaj-dubaj');
-                }}
-                className="inline-block bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full transition-colors"
-              >
-                Poznaj Dubaj
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  console.log('Abu Dhabi button clicked');
-                  handleNavigation('/abu-dhabi');
-                }}
-                className="inline-block bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-8 rounded-full transition-colors"
-              >
-                Odkryj Abu Dhabi
-              </motion.button>
-            </div>
           </motion.div>
         </div>
       </div>
