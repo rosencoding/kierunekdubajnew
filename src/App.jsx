@@ -12,16 +12,18 @@ import AttractionsList from './components/AttractionsList';
 import Blog from './pages/Blog';
 import PlanPodrozy from './components/PlanPodrozy';
 import FAQPage from './pages/FAQPage';
-import PodstawoweInformacje from './pages/PodstawoweInformacje';
-import KiedyJechac from './pages/KiedyJechac';
-import Transport from './pages/Transport';
-import Dzielnice from './pages/Dzielnice';
-import KulturaIZwyczaje from './pages/KulturaIZwyczaje';
-import PraktycznePorady from './pages/PraktycznePorady';
+import PodstawoweInformacje from './components/PodstawoweInformacje';
+import KiedyJechac from './components/KiedyJechac';
+import Transport from './components/Transport';
+import Dzielnice from './components/Dzielnice';
+import KulturaIZwyczaje from './components/KulturaIZwyczaje';
+import PraktycznePorady from './components/PraktycznePorady';
 import BurjKhalifaPage from './pages/BurjKhalifaPage';
 import DubaiMallPage from './pages/DubaiMallPage';
 import PalmJumeirahPage from './pages/PalmJumeirahPage';
 import DubaiFramePage from './pages/DubaiFramePage';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 // Import all attraction pages
 import DubaiAquariumPage from './pages/DubaiAquariumPage';
@@ -114,8 +116,6 @@ import {
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Define routes configuration

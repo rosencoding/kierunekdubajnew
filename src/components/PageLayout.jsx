@@ -66,7 +66,9 @@ const PageLayout = ({ children }) => {
       </Helmet>
       <Navbar />
       <main className="flex-grow">
-        {children}
+        <div className="container mx-auto px-4">
+          {children}
+        </div>
       </main>
       <Footer />
     </div>
