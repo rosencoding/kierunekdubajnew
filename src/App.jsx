@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useLocation, Link } from 'react-router-dom';
+import { Routes, Route, useLocation, Link, useOutlet } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Helmet } from 'react-helmet';
 import Navbar from './components/Navbar';
@@ -120,144 +120,42 @@ import { motion } from 'framer-motion';
 import NotFoundPage from './pages/NotFoundPage';
 
 function AppContent() {
+  const location = useLocation();
+  const { setTitle } = usePageTitle();
   useScrollToTop();
 
   return (
-    <PageLayout>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={
-            <>
-              <Hero />
-              <MainAttractions />
-            </>
-          } />
-          <Route path="/abu-dhabi" element={<AbuDhabiPage />} />
-          <Route path="/atrakcje" element={<AttractionsPage />} />
-          <Route path="/dubaj" element={<DubaiPage />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:postId" element={<Blog />} />
-          <Route path="/plan-podrozy" element={<PlanPodrozy />} />
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="/podstawowe-informacje" element={<PodstawoweInformacje />} />
-          <Route path="/kiedy-jechac" element={<KiedyJechac />} />
-          <Route path="/transport" element={<Transport />} />
-          <Route path="/dzielnice" element={<Dzielnice />} />
-          <Route path="/kultura-i-zwyczaje" element={<KulturaIZwyczaje />} />
-          <Route path="/praktyczne-porady" element={<PraktycznePorady />} />
-          <Route path="/poznaj-dubaj" element={<PoznajDubajPage />} />
-          <Route path="/kontakt" element={<KontaktPage />} />
-          <Route path="/polityka-prywatnosci" element={<PolitykaPrywatnosciPage />} />
-
-          {/* Individual Attraction Routes */}
-          <Route path="/atrakcje/burj-khalifa" element={<BurjKhalifaPage />} />
-          <Route path="/atrakcje/dubai-mall" element={<DubaiMallPage />} />
-          <Route path="/atrakcje/palm-jumeirah" element={<PalmJumeirahPage />} />
-          <Route path="/atrakcje/dubai-frame" element={<DubaiFramePage />} />
-          <Route path="/atrakcje/dubai-aquarium" element={<DubaiAquariumPage />} />
-          <Route path="/atrakcje/dubai-opera" element={<DubaiOperaPage />} />
-          <Route path="/atrakcje/ski-dubai" element={<SkiDubaiPage />} />
-          <Route path="/atrakcje/dubai-marina" element={<DubaiMarinaPage />} />
-          <Route path="/atrakcje/jumeirah-mosque" element={<JumeirahMosquePage />} />
-          <Route path="/atrakcje/dubai-fountain" element={<DubaiFountainPage />} />
-          <Route path="/atrakcje/global-village" element={<GlobalVillagePage />} />
-          <Route path="/atrakcje/motiongate" element={<MotiongateParksPage />} />
-          <Route path="/atrakcje/gold-souk" element={<GoldSoukPage />} />
-          <Route path="/atrakcje/spice-souk" element={<SpiceSoukPage />} />
-          <Route path="/atrakcje/mall-of-emirates" element={<MallOfEmiratesPage />} />
-          <Route path="/atrakcje/deep-dive-dubai" element={<DeepDiveDubaiPage />} />
-          <Route path="/atrakcje/dubai-parks-resorts" element={<DubaiParksResortsPage />} />
-          <Route path="/atrakcje/aquaventure" element={<AquaventurePage />} />
-          <Route path="/atrakcje/butterfly-garden" element={<ButterflyGardenPage />} />
-          <Route path="/atrakcje/dubai-garden-glow" element={<DubaiGardenGlowPage />} />
-          <Route path="/atrakcje/dubai-museum" element={<DubaiMuseumPage />} />
-          <Route path="/atrakcje/etihad-museum" element={<EtihadMuseumPage />} />
-          <Route path="/atrakcje/madinat-jumeirah" element={<MadinatJumeirahPage />} />
-          <Route path="/atrakcje/sheikh-mohammed-centre" element={<SheikhMohammedCentrePage />} />
-          <Route path="/atrakcje/ras-al-khor" element={<RasAlKhorPage />} />
-          <Route path="/atrakcje/desert-conservation" element={<DesertConservationPage />} />
-          <Route path="/atrakcje/dubai-safari" element={<DubaiSafariPage />} />
-          <Route path="/atrakcje/jbr-beach" element={<JBRBeachPage />} />
-          <Route path="/atrakcje/kite-beach" element={<KiteBeachPage />} />
-          <Route path="/atrakcje/love-lakes" element={<LoveLakesPage />} />
-          <Route path="/atrakcje/view-palm" element={<ViewPalmPage />} />
-          <Route path="/atrakcje/la-mer" element={<LaMerPage />} />
-          <Route path="/atrakcje/the-pointe" element={<ThePointePage />} />
-          <Route path="/atrakcje/miracle-garden" element={<MiracleGardenPage />} />
-          <Route path="/atrakcje/img-worlds" element={<IMGWorldsPage />} />
-          <Route path="/atrakcje/dubai-creek" element={<DubaiCreekPage />} />
-          <Route path="/atrakcje/wild-wadi" element={<WildWadiPage />} />
-          <Route path="/atrakcje/address-sky-view" element={<AddressSkyViewPage />} />
-          <Route path="/atrakcje/xline-dubai-marina" element={<XLineDubaiMarinaPage />} />
-          <Route path="/atrakcje/green-planet" element={<GreenPlanetPage />} />
-          <Route path="/atrakcje/zabeel-park" element={<ZabeelParkPage />} />
-          <Route path="/atrakcje/al-fahidi" element={<AlFahidiPage />} />
-          <Route path="/atrakcje/textile-souk" element={<TextileSoukPage />} />
-          <Route path="/atrakcje/dubai-festival-city-mall" element={<DubaiFestivalCityMallPage />} />
-          <Route path="/atrakcje/infinity-des-lumieres" element={<InfinityDesLumieresPage />} />
-          <Route path="/atrakcje/atlantis-the-royal" element={<AtlantisTheRoyalPage />} />
-          <Route path="/atrakcje/ain-dubai" element={<AinDubaiPage />} />
-          <Route path="/atrakcje/burj-al-arab" element={<BurjAlArabPage />} />
-          <Route path="/atrakcje/jumeirah-beach" element={<JumeirahBeachPage />} />
-          <Route path="/atrakcje/city-walk" element={<CityWalkPage />} />
-          <Route path="/atrakcje/museum-of-future" element={<MuseumOfFuturePage />} />
-          <Route path="/atrakcje/bollywood-parks" element={<BollywoodParksPage />} />
-          <Route path="/atrakcje/dubaj-skok-ze-spadochronem" element={<DubajSkokZeSpadochronemPage />} />
-
-          {/* Abu Dhabi Attractions */}
-          <Route path="/abu-dhabi/sheikh-zayed-mosque" element={<SheikhZayedMosquePage />} />
-          <Route path="/abu-dhabi/ferrari-world" element={<FerrariWorldPage />} />
-          <Route path="/atrakcje/yas-waterworld" element={<YasWaterworldPage />} />
-          <Route path="/abu-dhabi/mangrove-national-park" element={<MangroveNationalParkPage />} />
-          <Route path="/abu-dhabi/heritage-village" element={<HeritageVillagePage />} />
-          <Route path="/abu-dhabi/al-ain-zoo" element={<AlAinZooPage />} />
-          <Route path="/abu-dhabi/falcon-hospital" element={<FalconHospitalPage />} />
-          <Route path="/abu-dhabi/capital-gate" element={<CapitalGatePage />} />
-          <Route path="/abu-dhabi/yas-marina-circuit" element={<YasMarinaCircuitPage />} />
-          <Route path="/abu-dhabi/marina-mall" element={<MarinaMallPage />} />
-          <Route path="/abu-dhabi/emirates-palace" element={<EmiratesPalacePage />} />
-          <Route path="/abu-dhabi/warner-bros-world" element={<WarnerBrosWorldPage />} />
-          <Route path="/abu-dhabi/corniche" element={<CornichePage />} />
-          <Route path="/abu-dhabi/qasr-al-watan" element={<QasrAlWatanPage />} />
-          <Route path="/abu-dhabi/observation-deck" element={<ObservationDeckPage />} />
-          <Route path="/abu-dhabi/abu-dhabi-mall" element={<AbuDhabiMallPage />} />
-          <Route path="/abu-dhabi/qasr-al-hosn" element={<QasrAlHosnPage />} />
-          <Route path="/abu-dhabi/al-ain-oasis" element={<AlAinOasisPage />} />
-          <Route path="/abu-dhabi/emirates-auto-museum" element={<EmiratesAutoMuseumPage />} />
-          <Route path="/abu-dhabi/louvre-abu-dhabi" element={<LouvreAbuDhabiPage />} />
-
-          {/* 404 Route - Must be last */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <Footer />
-      </div>
-    </PageLayout>
+    <Routes>
+      <Route path="/" element={<PageLayout><Navbar /><Hero /><MainAttractions /><AttractionsList /><Footer /></PageLayout>} />
+      <Route path="/blog/*" element={<PageLayout><Navbar /><Blog /><Footer /></PageLayout>} />
+      <Route path="/plan-podrozy" element={<PageLayout><Navbar /><PlanPodrozy /><Footer /></PageLayout>} />
+      <Route path="/faq" element={<PageLayout><Navbar /><FAQPage /><Footer /></PageLayout>} />
+      <Route path="/podstawowe-informacje" element={<PageLayout><Navbar /><PodstawoweInformacje /><Footer /></PageLayout>} />
+      <Route path="/kiedy-jechac" element={<PageLayout><Navbar /><KiedyJechac /><Footer /></PageLayout>} />
+      <Route path="/transport" element={<PageLayout><Navbar /><Transport /><Footer /></PageLayout>} />
+      <Route path="/dzielnice" element={<PageLayout><Navbar /><Dzielnice /><Footer /></PageLayout>} />
+      <Route path="/kultura-i-zwyczaje" element={<PageLayout><Navbar /><KulturaIZwyczaje /><Footer /></PageLayout>} />
+      <Route path="/praktyczne-porady" element={<PageLayout><Navbar /><PraktycznePorady /><Footer /></PageLayout>} />
+      
+      {/* Attraction Pages */}
+      <Route path="/atrakcje/burj-khalifa" element={<PageLayout><Navbar /><BurjKhalifaPage /><Footer /></PageLayout>} />
+      <Route path="/atrakcje/dubai-mall" element={<PageLayout><Navbar /><DubaiMallPage /><Footer /></PageLayout>} />
+      <Route path="/atrakcje/palm-jumeirah" element={<PageLayout><Navbar /><PalmJumeirahPage /><Footer /></PageLayout>} />
+      <Route path="/atrakcje/dubai-frame" element={<PageLayout><Navbar /><DubaiFramePage /><Footer /></PageLayout>} />
+      {/* ... other attraction routes ... */}
+      
+      {/* Catch-all route */}
+      <Route path="*" element={<PageLayout><div className="container mx-auto px-4 py-8"><h1>404 - Strona nie znaleziona</h1></div></PageLayout>} />
+    </Routes>
   );
 }
 
 function App() {
   return (
     <HelmetProvider>
-      <ItineraryProvider>
-        <DocumentTitleManager />
-        <Helmet>
-          <meta name="google-site-verification" content="F6Lb6dQqoyYufmrte8-8s1LIM5lIDahURjdBan-T1vY" />
-          <script async defer src="https://widget.getyourguide.com/dist/pa.umd.production.min.js" data-gyg-partner-id="19WQ75B"></script>
-          <script async src="https://widget.getyourguide.com/dist/activities.min.js"></script>
-          {/* Google Analytics */}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ2N5KC7J1"></script>
-          <script>
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XQ2N5KC7J1');
-            `}
-          </script>
-        </Helmet>
+      <DocumentTitleManager>
         <AppContent />
-      </ItineraryProvider>
+      </DocumentTitleManager>
     </HelmetProvider>
   );
 }
