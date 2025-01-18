@@ -1,8 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="relative bg-gray-900">
       {/* Background Image */}
@@ -32,28 +38,22 @@ const Hero = () => {
             </p>
 
             <div className="mt-10 flex justify-center gap-4">
-              <motion.div
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigation('/poznaj-dubaj')}
+                className="inline-block bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full transition-colors"
               >
-                <Link
-                  to="/poznaj-dubaj"
-                  className="inline-block bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full transition-colors"
-                >
-                  Poznaj Dubaj
-                </Link>
-              </motion.div>
-              <motion.div
+                Poznaj Dubaj
+              </motion.button>
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigation('/abu-dhabi')}
+                className="inline-block bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-8 rounded-full transition-colors"
               >
-                <Link
-                  to="/abu-dhabi"
-                  className="inline-block bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-8 rounded-full transition-colors"
-                >
-                  Odkryj Abu Dhabi
-                </Link>
-              </motion.div>
+                Odkryj Abu Dhabi
+              </motion.button>
             </div>
           </motion.div>
         </div>
