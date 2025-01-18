@@ -54,10 +54,6 @@ const usePageTitle = (defaultTitle) => {
     }
 
     document.title = newTitle;
-
-    return () => {
-      document.title = baseSuffix;
-    };
   }, [location.pathname, defaultTitle]);
 };
 
