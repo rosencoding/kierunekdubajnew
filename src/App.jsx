@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation, Link, useOutlet } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -119,42 +120,49 @@ import { motion } from 'framer-motion';
 
 import NotFoundPage from './pages/NotFoundPage';
 
-function AppContent() {
-  const location = useLocation();
-  const { setTitle } = usePageTitle();
-  useScrollToTop();
-
-  return (
-    <Routes>
-      <Route path="/" element={<PageLayout><Navbar /><Hero /><MainAttractions /><AttractionsList /><Footer /></PageLayout>} />
-      <Route path="/blog/*" element={<PageLayout><Navbar /><Blog /><Footer /></PageLayout>} />
-      <Route path="/plan-podrozy" element={<PageLayout><Navbar /><PlanPodrozy /><Footer /></PageLayout>} />
-      <Route path="/faq" element={<PageLayout><Navbar /><FAQPage /><Footer /></PageLayout>} />
-      <Route path="/podstawowe-informacje" element={<PageLayout><Navbar /><PodstawoweInformacje /><Footer /></PageLayout>} />
-      <Route path="/kiedy-jechac" element={<PageLayout><Navbar /><KiedyJechac /><Footer /></PageLayout>} />
-      <Route path="/transport" element={<PageLayout><Navbar /><Transport /><Footer /></PageLayout>} />
-      <Route path="/dzielnice" element={<PageLayout><Navbar /><Dzielnice /><Footer /></PageLayout>} />
-      <Route path="/kultura-i-zwyczaje" element={<PageLayout><Navbar /><KulturaIZwyczaje /><Footer /></PageLayout>} />
-      <Route path="/praktyczne-porady" element={<PageLayout><Navbar /><PraktycznePorady /><Footer /></PageLayout>} />
-      
-      {/* Attraction Pages */}
-      <Route path="/atrakcje/burj-khalifa" element={<PageLayout><Navbar /><BurjKhalifaPage /><Footer /></PageLayout>} />
-      <Route path="/atrakcje/dubai-mall" element={<PageLayout><Navbar /><DubaiMallPage /><Footer /></PageLayout>} />
-      <Route path="/atrakcje/palm-jumeirah" element={<PageLayout><Navbar /><PalmJumeirahPage /><Footer /></PageLayout>} />
-      <Route path="/atrakcje/dubai-frame" element={<PageLayout><Navbar /><DubaiFramePage /><Footer /></PageLayout>} />
-      {/* ... other attraction routes ... */}
-      
-      {/* Catch-all route */}
-      <Route path="*" element={<PageLayout><div className="container mx-auto px-4 py-8"><h1>404 - Strona nie znaleziona</h1></div></PageLayout>} />
-    </Routes>
-  );
-}
-
 function App() {
+  useScrollToTop();
+  const location = useLocation();
+
   return (
     <HelmetProvider>
       <DocumentTitleManager>
-        <AppContent />
+        <Routes>
+          <Route path="/" element={
+            <PageLayout>
+              <Navbar />
+              <Hero />
+              <MainAttractions />
+              <AttractionsList />
+              <Footer />
+            </PageLayout>
+          } />
+          <Route path="/blog/*" element={<PageLayout><Navbar /><Blog /><Footer /></PageLayout>} />
+          <Route path="/plan-podrozy" element={<PageLayout><Navbar /><PlanPodrozy /><Footer /></PageLayout>} />
+          <Route path="/faq" element={<PageLayout><Navbar /><FAQPage /><Footer /></PageLayout>} />
+          <Route path="/podstawowe-informacje" element={<PageLayout><Navbar /><PodstawoweInformacje /><Footer /></PageLayout>} />
+          <Route path="/kiedy-jechac" element={<PageLayout><Navbar /><KiedyJechac /><Footer /></PageLayout>} />
+          <Route path="/transport" element={<PageLayout><Navbar /><Transport /><Footer /></PageLayout>} />
+          <Route path="/dzielnice" element={<PageLayout><Navbar /><Dzielnice /><Footer /></PageLayout>} />
+          <Route path="/kultura-i-zwyczaje" element={<PageLayout><Navbar /><KulturaIZwyczaje /><Footer /></PageLayout>} />
+          <Route path="/praktyczne-porady" element={<PageLayout><Navbar /><PraktycznePorady /><Footer /></PageLayout>} />
+          
+          {/* Attraction Pages */}
+          <Route path="/atrakcje/burj-khalifa" element={<PageLayout><Navbar /><BurjKhalifaPage /><Footer /></PageLayout>} />
+          <Route path="/atrakcje/dubai-mall" element={<PageLayout><Navbar /><DubaiMallPage /><Footer /></PageLayout>} />
+          <Route path="/atrakcje/palm-jumeirah" element={<PageLayout><Navbar /><PalmJumeirahPage /><Footer /></PageLayout>} />
+          <Route path="/atrakcje/dubai-frame" element={<PageLayout><Navbar /><DubaiFramePage /><Footer /></PageLayout>} />
+          {/* ... other attraction routes ... */}
+          
+          {/* Catch-all route */}
+          <Route path="*" element={
+            <PageLayout>
+              <div className="container mx-auto px-4 py-8">
+                <h1>404 - Strona nie znaleziona</h1>
+              </div>
+            </PageLayout>
+          } />
+        </Routes>
       </DocumentTitleManager>
     </HelmetProvider>
   );

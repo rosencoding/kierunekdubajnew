@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { Helmet } from 'react-helmet';
@@ -8,11 +8,36 @@ const PageLayout = ({ children }) => {
   // The hook will automatically handle title updates based on the URL
   usePageTitle();
 
+  useEffect(() => {
+    // Function to load GetYourGuide script
+    const loadGYGScript = () => {
+      const script = document.createElement('script');
+      script.src = 'https://widget.getyourguide.com/dist/pa.umd.production.min.js';
+      script.async = true;
+      script.defer = true;
+      script.setAttribute('data-gyg-partner-id', '19WQ75B');
+      
+      // Add error handling
+      script.onerror = () => {
+        console.error('Failed to load GetYourGuide widget script');
+      };
+      
+      document.body.appendChild(script);
+      
+      return () => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      };
+    };
+
+    return loadGYGScript();
+  }, []);
+
   return (
     <>
       <Helmet>
         <meta name="google-site-verification" content="F6Lb6dQqoyYufmrte8-8s1LIM5lIDahURjdBan-T1vY" />
-        <script async defer src="https://widget.getyourguide.com/dist/pa.umd.production.min.js" data-gyg-partner-id="19WQ75B"></script>
         {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ2N5KC7J1"></script>
         <script>
