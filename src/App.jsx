@@ -2,7 +2,6 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import { FUTURE_FLAGS } from '@remix-run/router';
 import { HelmetProvider } from 'react-helmet-async';
-import DocumentTitleManager from './components/DocumentTitleManager';
 import useScrollToTop from './hooks/useScrollToTop';
 import PageLayout from './components/PageLayout';
 
@@ -126,16 +125,14 @@ const router = createBrowserRouter([
   }
 ]);
 
-function App() {
+const App = () => {
   useScrollToTop();
   console.log('App rendering');
   return (
     <HelmetProvider>
-      <DocumentTitleManager>
-        <RouterProvider router={router} />
-      </DocumentTitleManager>
+      <RouterProvider router={router} />
     </HelmetProvider>
   );
-}
+};
 
 export default App;
