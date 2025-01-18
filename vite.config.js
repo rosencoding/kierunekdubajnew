@@ -36,10 +36,27 @@ export default defineConfig({
         main: path.resolve(__dirname, 'index.html'),
       },
       output: {
-        entryFileNames: `assets/[name].[hash].js`,
-        chunkFileNames: `assets/[name].[hash].js`,
-        assetFileNames: `assets/[name].[hash].[ext]`
-      }
-    }
-  }
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.')
+          const ext = info[info.length - 1]
+          if (/\.(css)$/i.test(assetInfo.name)) {
+            return `assets/[name].[hash][extname]`
+          }
+          return `assets/[name].[hash][extname]`
+        },
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
+      },
+    },
+    assetsDir: 'assets',
+    manifest: true,
+  },
+  server: {
+    headers: {
+      'Content-Type': {
+        '.js': 'application/javascript',
+        '.css': 'text/css',
+      },
+    },
+  },
 });
