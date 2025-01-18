@@ -1,21 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import { ItineraryProvider } from './contexts/ItineraryContext';
 import ErrorBoundary from './components/ErrorBoundary';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
-root.render(
-  <React.StrictMode>
-    <ErrorBoundary>
-      <BrowserRouter>
+// Create router with future flags enabled
+const router = createBrowserRouter([
+  {
+    path: '/*',
+    element: (
+      <ErrorBoundary>
         <ItineraryProvider>
           <App />
         </ItineraryProvider>
-      </BrowserRouter>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    ),
+  }
+], {
+  future: {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true
+  }
+});
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

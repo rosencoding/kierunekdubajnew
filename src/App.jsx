@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRoutes } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import DocumentTitleManager from './components/DocumentTitleManager';
 import useScrollToTop from './hooks/useScrollToTop';
@@ -118,94 +118,46 @@ import { motion } from 'framer-motion';
 
 import NotFoundPage from './pages/NotFoundPage';
 
-// Define routes configuration
-const routes = [
-  {
-    path: '/',
-    element: (
-      <PageLayout>
-        <div>
-          <Hero />
-          <MainAttractions />
-          <AttractionsList />
-        </div>
-      </PageLayout>
-    ),
-  },
-  {
-    path: '/blog/*',
-    element: <PageLayout><Blog /></PageLayout>,
-  },
-  {
-    path: '/plan-podrozy',
-    element: <PageLayout><PlanPodrozy /></PageLayout>,
-  },
-  {
-    path: '/faq',
-    element: <PageLayout><FAQPage /></PageLayout>,
-  },
-  {
-    path: '/podstawowe-informacje',
-    element: <PageLayout><PodstawoweInformacje /></PageLayout>,
-  },
-  {
-    path: '/kiedy-jechac',
-    element: <PageLayout><KiedyJechac /></PageLayout>,
-  },
-  {
-    path: '/transport',
-    element: <PageLayout><Transport /></PageLayout>,
-  },
-  {
-    path: '/dzielnice',
-    element: <PageLayout><Dzielnice /></PageLayout>,
-  },
-  {
-    path: '/kultura-i-zwyczaje',
-    element: <PageLayout><KulturaIZwyczaje /></PageLayout>,
-  },
-  {
-    path: '/praktyczne-porady',
-    element: <PageLayout><PraktycznePorady /></PageLayout>,
-  },
-  {
-    path: '/atrakcje/burj-khalifa',
-    element: <PageLayout><BurjKhalifaPage /></PageLayout>,
-  },
-  {
-    path: '/atrakcje/dubai-mall',
-    element: <PageLayout><DubaiMallPage /></PageLayout>,
-  },
-  {
-    path: '/atrakcje/palm-jumeirah',
-    element: <PageLayout><PalmJumeirahPage /></PageLayout>,
-  },
-  {
-    path: '/atrakcje/dubai-frame',
-    element: <PageLayout><DubaiFramePage /></PageLayout>,
-  },
-  {
-    path: '*',
-    element: (
-      <PageLayout>
-        <div className="container mx-auto px-4 py-8">
-          <h1>404 - Strona nie znaleziona</h1>
-        </div>
-      </PageLayout>
-    ),
-  },
-];
-
 function App() {
   useScrollToTop();
-  const element = useRoutes(routes);
+  const location = useLocation();
 
   return (
     <HelmetProvider>
       <DocumentTitleManager>
-        <Navbar />
-        {element}
-        <Footer />
+        <div className="min-h-screen flex flex-col">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={
+              <PageLayout>
+                <Hero />
+                <MainAttractions />
+                <AttractionsList />
+              </PageLayout>
+            } />
+            <Route path="/blog/*" element={<PageLayout><Blog /></PageLayout>} />
+            <Route path="/plan-podrozy" element={<PageLayout><PlanPodrozy /></PageLayout>} />
+            <Route path="/faq" element={<PageLayout><FAQPage /></PageLayout>} />
+            <Route path="/podstawowe-informacje" element={<PageLayout><PodstawoweInformacje /></PageLayout>} />
+            <Route path="/kiedy-jechac" element={<PageLayout><KiedyJechac /></PageLayout>} />
+            <Route path="/transport" element={<PageLayout><Transport /></PageLayout>} />
+            <Route path="/dzielnice" element={<PageLayout><Dzielnice /></PageLayout>} />
+            <Route path="/kultura-i-zwyczaje" element={<PageLayout><KulturaIZwyczaje /></PageLayout>} />
+            <Route path="/praktyczne-porady" element={<PageLayout><PraktycznePorady /></PageLayout>} />
+            <Route path="/atrakcje/burj-khalifa" element={<PageLayout><BurjKhalifaPage /></PageLayout>} />
+            <Route path="/atrakcje/dubai-mall" element={<PageLayout><DubaiMallPage /></PageLayout>} />
+            <Route path="/atrakcje/palm-jumeirah" element={<PageLayout><PalmJumeirahPage /></PageLayout>} />
+            <Route path="/atrakcje/dubai-frame" element={<PageLayout><DubaiFramePage /></PageLayout>} />
+            <Route path="*" element={
+              <PageLayout>
+                <div className="container mx-auto px-4 py-8">
+                  <h1>404 - Strona nie znaleziona</h1>
+                </div>
+              </PageLayout>
+            } />
+          </Routes>
+          <Footer />
+        </div>
       </DocumentTitleManager>
     </HelmetProvider>
   );
